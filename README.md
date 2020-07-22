@@ -2,10 +2,39 @@
 
 #### First install project specific tooling
 
-* TypeScript/React projects
-* Plain ES projects
-* SCSS with styleline
+TypeScript projects (for plain ES projects `@intractive/eslint-config-es`):
+```
+yarn add --dev eslint prettier @intractive/eslint-config-ts
+cat <<EOF > .eslintrc
+{
+  "extends": "@intractive/eslint-config-ts"
+}
+EOF
+```
 
+SCSS with stylelint
+```
+yarn add --dev stylelint @intractive/stylelint-config
+cat <<EOF > .stylelintrc
+{
+  "extends": "@intractive/stylelint-config"
+}
+EOF
+```
+
+#### For TypeScript projects, ensure strict compiler settings:
+
+```
+// tsconfig.json
+{
+  "compilerOptions": {
+    ...
+    "strict": true,
+    ...
+  }
+}
+
+```
 
 #### Configure husky and commitlint
 
