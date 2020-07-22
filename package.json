@@ -1,0 +1,14 @@
+{
+  "name": "@intractive/devops",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Boy van der Laak <boyvanderlaak@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lerna": "lerna"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}

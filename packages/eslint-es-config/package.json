@@ -1,0 +1,15 @@
+{
+  "name": "@intractive/eslint-es-config",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "eslint-config-unobtrusive": "^1.2.5"
+  },
+  "peerDependencies": {
+    "eslint": ">= 7"
+  },
+  "files": [
+    "index.js"
+  ]
+}
