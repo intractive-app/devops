@@ -93,6 +93,23 @@ function getWriterOpts() {
         }
       }
 
+      if (typeof commit.body === `string`) {
+        const lines = commit.body.trim().split("\n");
+
+        const outputLines = [];
+        for(const line of lines) {
+          let outputLine = line;
+          // Add a bullet point if this line does not start with one
+          if(!/^[-\*] /.test(outputLine)) outputLine = `* ${outputLine}`;
+
+          // Add whitespace to indent this bulletpoint
+          outputLine = `  ${outputLine}`;
+          outputLines.push(outputLine);
+        }
+
+        commit.body = outputLines.join("\n");
+      }
+
       // remove references that already appear in the subject
       commit.references = commit.references.filter(reference => {
         if (issues.indexOf(reference.issue) === -1) {
