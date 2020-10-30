@@ -94,20 +94,25 @@ function getWriterOpts() {
       }
 
       if (typeof commit.body === `string`) {
-        const lines = commit.body.trim().split("\n");
+        const paragraphs = commit.body.trim().split("\n\n");
 
-        const outputLines = [];
-        for(const line of lines) {
-          let outputLine = line;
-          // Add a bullet point if this line does not start with one
-          if(!/^[-\*] /.test(outputLine)) outputLine = `* ${outputLine}`;
+        const output = [];
+        for(let paragraph of paragraphs) {
 
-          // Add whitespace to indent this bulletpoint
-          outputLine = `  ${outputLine}`;
-          outputLines.push(outputLine);
+          paragraph = paragraph
+          .split("\n")
+          .map((line) => {
+            return `  ${line}  `;
+          })
+          .join("\n");
+
+          if(!/^  [-\*] /.test(paragraph)) 
+            paragraph = paragraph.replace(/^  /, "  * ");
+
+          output.push(paragraph);
         }
 
-        commit.body = outputLines.join("\n");
+        commit.body = output.join("\n").trimEnd() + "\n";
       }
 
       // remove references that already appear in the subject
