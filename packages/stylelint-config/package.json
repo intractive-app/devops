@@ -6,8 +6,8 @@
   "dependencies": {
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-declaration-use-variable": "^1.7.2",
-    "stylelint-prettier": "^1.1.2",
-    "stylelint-scss": "^3.18.0"
+    "stylelint-prettier": "^1.2.0",
+    "stylelint-scss": "^3.19.0"
   },
   "peerDependencies": {
     "stylelint": ">= 11"
