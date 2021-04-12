@@ -5,6 +5,10 @@ const Q = require(`q`);
 const readFile = Q.denodeify(require(`fs`).readFile);
 const resolve = require(`path`).resolve;
 
+
+// In reverse order (last one comes first)
+const groupOrder = ["Bug Fixes", "Improvements", "Features"];
+
 module.exports = Q.all([
   readFile(resolve(__dirname, `./templates/template.hbs`), `utf-8`),
   readFile(resolve(__dirname, `./templates/header.hbs`), `utf-8`),
@@ -102,8 +106,12 @@ function getWriterOpts() {
           paragraph = paragraph
           .split("\n")
           .map((line) => {
+
+            if(line.indexOf("Co-authored-by:") > -1)
+              return null;
             return `  ${line}  `;
           })
+          .filter(l => !!l)
           .join("\n");
 
           if(!/^  [-\*] /.test(paragraph)) 
@@ -127,7 +135,12 @@ function getWriterOpts() {
       return commit;
     },
     groupBy: `type`,
-    commitGroupsSort: `title`,
+    commitGroupsSort: (a, b) => {
+      const aIndex = groupOrder.indexOf(a.title)
+      const bIndex = groupOrder.indexOf(b.title); 
+
+      return aIndex < bIndex ? 1 : -1;
+    },
     commitsSort: [`scope`, `subject`],
     noteGroupsSort: `title`,
     notesSort: compareFunc
